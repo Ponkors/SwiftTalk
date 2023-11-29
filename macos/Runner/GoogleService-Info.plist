@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyAQXoH5KlPIdPI-6o7NGnfBU1soEjs77VM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>102935724771</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.swiftTalk.RunnerTests</string>
+	<key>PROJECT_ID</key>
+	<string>swifttalk-5757d</string>
+	<key>STORAGE_BUCKET</key>
+	<string>swifttalk-5757d.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:102935724771:ios:57c16be14a163cbaad3bd6</string>
+</dict>
+</plist>

@@ -61,4 +61,13 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
     final UserEntity userEntity = await _hiveProvider.getUserFromLocal();
     return UserMapper.toModel(userEntity);
   }
+
+  @override
+  Future<UserModel> signInWithGoogle() async {
+    final UserEntity userEntity =
+    await _firebaseAuthProvider.signInWithGoogle();
+    final UserModel userModel = UserMapper.toModel(userEntity);
+    await _hiveProvider.saveUserToLocal(userModel);
+    return userModel;
+  }
 }

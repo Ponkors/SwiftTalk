@@ -28,6 +28,7 @@ class WalkthroughForm extends StatelessWidget {
               ),
               SizedBox(height: 50),
               WalkthroughButton(() {
+
                 AutoRouter.of(context).pushNamed('check_auth_screen');
               }),
               SizedBox(height: 30),
@@ -38,16 +39,6 @@ class WalkthroughForm extends StatelessWidget {
     );
   }
 }
-
-
-// GestureDetector(
-//   onTap: () {
-//     AutoRouter.of(context).pushNamed('main_screen');
-//   },
-//   child: WelcomeButtonWidget(() {
-//     AutoRouter.of(context).pushNamed('home_page');
-//   }),
-// ),
 
 final List<Map<String, dynamic>> pages = [
   {

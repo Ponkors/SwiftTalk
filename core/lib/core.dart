@@ -12,3 +12,4 @@ export 'package:flutter_bloc/flutter_bloc.dart';
 export 'config/firebase_options.dart';
 export 'di/app_di.dart';
 export 'di/data_di.dart';
+export 'extensions/bottom_navigation_bar.dart';

@@ -5,14 +5,14 @@ class AppTheme {
   static ThemeData get lightTheme {
     return ThemeData(
       colorScheme: ColorScheme.fromSwatch(
-        primarySwatch: Colors.orange,
+        primarySwatch: Colors.blue,
       ),
-      primaryColor: AppColors.orange,
+      primaryColor: AppColors.blue,
       canvasColor: AppColors.lightGrey,
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         backgroundColor: AppColors.white,
         unselectedItemColor: AppColors.grey,
-        selectedItemColor: AppColors.orange,
+        selectedItemColor: AppColors.black,
       ),
     );
   }
@@ -20,14 +20,14 @@ class AppTheme {
   static ThemeData get darkTheme {
     return ThemeData(
       colorScheme: ColorScheme.fromSwatch(
-        primarySwatch: Colors.orange,
+        primarySwatch: Colors.blue,
       ),
-      primaryColor: AppColors.orange,
+      primaryColor: AppColors.blue,
       canvasColor: AppColors.grey,
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         backgroundColor: AppColors.grey,
         unselectedItemColor: AppColors.white,
-        selectedItemColor: AppColors.orange,
+        selectedItemColor: AppColors.black,
       ),
     );
   }

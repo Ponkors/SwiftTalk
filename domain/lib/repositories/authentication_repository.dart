@@ -19,4 +19,6 @@ abstract class AuthenticationRepository {
   });
 
   Future<UserModel> getUserFromStorage();
+
+  Future<UserModel> signInWithGoogle();
 }

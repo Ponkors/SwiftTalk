@@ -11,6 +11,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   final SignInUseCase _signInUseCase;
   final SignUpUseCase _signUpUseCase;
   final SignOutUseCase _signOutUseCase;
+  final SignInWithGoogleUseCase _signInWithGoogleUseCase;
   final ResetPasswordUseCase _resetPasswordUseCase;
   final GetUserFromStorageUseCase _getUserFromStorageUseCase;
   final AppRouter _appRouter;
@@ -19,12 +20,14 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     required SignInUseCase signInUseCase,
     required SignUpUseCase signUpUseCase,
     required SignOutUseCase signOutUseCase,
+    required SignInWithGoogleUseCase signInWithGoogleUseCase,
     required ResetPasswordUseCase resetPasswordUseCase,
     required GetUserFromStorageUseCase getUserFromStorageUseCase,
     required AppRouter appRouter,
   })  : _signInUseCase = signInUseCase,
         _signUpUseCase = signUpUseCase,
         _signOutUseCase = signOutUseCase,
+        _signInWithGoogleUseCase = signInWithGoogleUseCase,
         _resetPasswordUseCase = resetPasswordUseCase,
         _getUserFromStorageUseCase = getUserFromStorageUseCase,
         _appRouter = appRouter,
@@ -35,6 +38,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     on<SignInSubmitted>(_signInSubmitted);
     on<SignUpSubmitted>(_signUpSubmitted);
     on<SignOutSubmitted>(_signOutSubmitted);
+    on<SignInWithGoogleSubmitted>(_signInWithGoogle);
     on<ResetPasswordSubmitted>(_resetPassword);
     on<NavigateToMenuPage>(_navigateToMenuPage);
     on<NavigateToSignInScreen>(_navigateToSignInScreen);
@@ -139,6 +143,32 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     );
     emit(state.copyWith(isLogged: false));
   }
+
+  Future<void> _signInWithGoogle(
+      SignInWithGoogleSubmitted event,
+      Emitter<AuthenticationState> emit,
+      ) async {
+    try {
+      final UserModel user = await _signInWithGoogleUseCase.execute(
+        const NoParams(),
+      );
+      emit(
+        state.copyWith(
+          userModel: user,
+        ),
+      );
+      _appRouter.replace(
+        const ExampleRoute(),
+      );
+    } catch (error) {
+      emit(
+        state.copyWith(
+          statusForm: SubmissionFormFailed(error.toString()),
+        ),
+      );
+    }
+  }
+
 
 
   Future<void> _resetPassword(

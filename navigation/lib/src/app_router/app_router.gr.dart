@@ -32,7 +32,7 @@ class _$AppRouter extends RootStackRouter {
     ExampleRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
         routeData: routeData,
-        child: ExampleScreen(),
+        child: const ExampleScreen(),
       );
     },
   };

@@ -17,4 +17,7 @@ abstract class FirebaseAuthProvider {
   Future<void> resetPassword({
     required String email,
   });
+
+
+  Future<UserEntity> signInWithGoogle();
 }

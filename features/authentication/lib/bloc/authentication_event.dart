@@ -58,4 +58,8 @@ class ChangeResetPasswordPage extends AuthenticationEvent {
   ChangeResetPasswordPage();
 }
 
+class SignInWithGoogleSubmitted extends AuthenticationEvent {
+  SignInWithGoogleSubmitted();
+}
+
 

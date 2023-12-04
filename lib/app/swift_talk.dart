@@ -16,6 +16,7 @@ class SwiftTalkApp extends StatelessWidget {
             signInUseCase: getIt.get<SignInUseCase>(),
             signUpUseCase: getIt.get<SignUpUseCase>(),
             signOutUseCase: getIt.get<SignOutUseCase>(),
+            signInWithGoogleUseCase: getIt.get<SignInWithGoogleUseCase>(),
             resetPasswordUseCase: getIt.get<ResetPasswordUseCase>(),
             getUserFromStorageUseCase: getIt.get<GetUserFromStorageUseCase>(),
             appRouter: getIt.get<AppRouter>(),

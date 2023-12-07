@@ -1,47 +1,53 @@
 import 'package:core/core.dart';
 import 'package:core_ui/core_ui.dart';
-import 'package:authentication/authentication.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final String title;
-  final showLogoutButton;
+  final int currentIndex;
+  final Function() onIconPressed;
 
   const CustomAppBar({
-    this.title = '',
-    this.showLogoutButton = true,
-    super.key
-  });
+    required this.currentIndex,
+    required this.onIconPressed,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
-    final AuthenticationBloc authenticationBloc = BlocProvider.of(context);
+    String titleText = '';
+
+    switch (currentIndex) {
+      case 0:
+        titleText = 'Contacts';
+        break;
+      case 1:
+        titleText = 'Chats';
+        break;
+      case 2:
+        titleText = 'More';
+        break;
+      default:
+        titleText = 'Change Default';
+    }
+
     return AppBar(
-        backgroundColor: themeData.primaryColor,
-        title: Text(
-          title,
+      backgroundColor: themeData.primaryColor,
+      title: Align(
+        alignment: Alignment.centerLeft,
+        child: Text(titleText),
+      ),
+      actions: [
+        IconButton(
+          icon: Icon(Icons.logout),
+          color: AppColors.black,
+          onPressed: onIconPressed,
         ),
-        actions: showLogoutButton
-            ? <Widget>[
-          IconButton(
-            onPressed: () {
-              authenticationBloc.add(
-                SignOutSubmitted(),
-              );
-              authenticationBloc.add(
-                NavigateToSignInScreen(),
-              );
-            },
-            icon: const Icon(
-              Icons.logout,
-              color: AppColors.white,
-            ),
-          ),
-        ]
-            : []
+      ],
+      elevation: themeData.appBarTheme.elevation,
     );
   }
 }

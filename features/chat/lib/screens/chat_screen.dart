@@ -18,7 +18,6 @@ class _ChatScreenState extends State<ChatScreen> {
     return MaterialApp(
       title: 'Chat Screen',
       home: Scaffold(
-        appBar: CustomAppBar(),
         body: Container(
           margin: EdgeInsets.symmetric(horizontal: AppDimens.size_10),
           child: Column(

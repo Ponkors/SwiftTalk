@@ -18,7 +18,6 @@ class _MoreScreenState extends State<MoreScreen> {
     return MaterialApp(
       title: 'More Screen',
       home: Scaffold(
-        appBar: CustomAppBar(),
         body: Container(
           margin: EdgeInsets.symmetric(horizontal: AppDimens.size_10),
           child: Column(

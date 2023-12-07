@@ -13,3 +13,4 @@ export 'config/firebase_options.dart';
 export 'di/app_di.dart';
 export 'di/data_di.dart';
 export 'extensions/bottom_navigation_bar.dart';
+export 'extensions/app_bar.dart';

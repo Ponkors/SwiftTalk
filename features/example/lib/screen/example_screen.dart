@@ -18,7 +18,6 @@ class _ExampleScreenState extends State<ExampleScreen> {
     return MaterialApp(
       title: 'ExampleScreen',
       home: Scaffold(
-        appBar: CustomAppBar(),
         bottomNavigationBar: CustomBottomNavigationBar(
           currentIndex: 0,
           onTap: (index) {},

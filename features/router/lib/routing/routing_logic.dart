@@ -10,6 +10,7 @@ class RoutingLogicScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AuthenticationBloc authenticationBloc = BlocProvider.of(context);
     return MultiBlocProvider(
       providers: <BlocProvider>[
         BlocProvider<AuthenticationBloc>(
@@ -43,6 +44,15 @@ class RoutingLogicScreen extends StatelessWidget {
               ),
             ),
             child: child,
+          );
+        },
+        appBarBuilder: (_, TabsRouter tabsRouter) {
+          return CustomAppBar(
+            currentIndex: tabsRouter.activeIndex,
+            onIconPressed: () {
+              authenticationBloc.add(SignOutSubmitted());
+              authenticationBloc.add(NavigateToSignInScreen());
+            },
           );
         },
         bottomNavigationBuilder: (_, TabsRouter tabsRouter) {

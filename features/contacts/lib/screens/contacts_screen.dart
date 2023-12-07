@@ -22,7 +22,6 @@ class _ContactsScreenState extends State<ContactsScreen> {
     return MaterialApp(
       title: 'Contacts Screen',
       home: Scaffold(
-        appBar: CustomAppBar(),
         body: BlocBuilder<AuthenticationBloc, AuthenticationState>(
           builder: (context, state) {
             return Container(

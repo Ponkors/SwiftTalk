@@ -35,7 +35,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     }
 
     return AppBar(
-      backgroundColor: themeData.primaryColor,
+      backgroundColor: AppBarColors.backgroundColor,
       title: Align(
         alignment: Alignment.centerLeft,
         child: Text(titleText),
@@ -43,7 +43,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         IconButton(
           icon: Icon(Icons.logout),
-          color: AppColors.black,
+          color: AppBarColors.buttonColor,
           onPressed: onIconPressed,
         ),
       ],

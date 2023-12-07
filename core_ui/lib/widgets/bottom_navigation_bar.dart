@@ -25,8 +25,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(item.label),
-            SizedBox(height: 5),
-            Icon(Icons.circle, size: 8),
+            SizedBox(height: AppDimens.size_5),
+            Icon(Icons.circle, size: AppDimens.size_8),
           ],
         )
             : Icon(item.icon),
@@ -43,10 +43,9 @@ class CustomBottomNavigationBar extends StatelessWidget {
           currentIndex: currentIndex,
           onTap: onTap,
           type: BottomNavigationBarType.fixed,
-          backgroundColor: themeData.bottomNavigationBarTheme.backgroundColor,
-          selectedItemColor: themeData.bottomNavigationBarTheme.selectedItemColor,
-          unselectedItemColor:
-          themeData.bottomNavigationBarTheme.unselectedItemColor,
+          backgroundColor: BottomNavigationBarColors.backgroundColor,
+          selectedItemColor: BottomNavigationBarColors.selectedItemsColor,
+          unselectedItemColor: BottomNavigationBarColors.unselectedItemsColor,
         ),
       ),
     );

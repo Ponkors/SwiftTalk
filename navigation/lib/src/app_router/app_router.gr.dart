@@ -29,10 +29,28 @@ class _$AppRouter extends RootStackRouter {
         child: const LogInScreen(),
       );
     },
-    ExampleRoute.name: (routeData) {
+    RoutingLogicRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const ExampleScreen(),
+        child: const RoutingLogicScreen(),
+      );
+    },
+    ContactsRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const ContactsScreen(),
+      );
+    },
+    ChatRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const ChatScreen(),
+      );
+    },
+    MoreRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const MoreScreen(),
       );
     },
   };
@@ -54,8 +72,25 @@ class _$AppRouter extends RootStackRouter {
           path: 'LogIn_screen',
         ),
         RouteConfig(
-          ExampleRoute.name,
-          path: 'example_screen',
+          RoutingLogicRoute.name,
+          path: 'routing_logic',
+          children: [
+            RouteConfig(
+              ContactsRoute.name,
+              path: 'contacts_screen',
+              parent: RoutingLogicRoute.name,
+            ),
+            RouteConfig(
+              ChatRoute.name,
+              path: 'chat_screen',
+              parent: RoutingLogicRoute.name,
+            ),
+            RouteConfig(
+              MoreRoute.name,
+              path: 'more_screen',
+              parent: RoutingLogicRoute.name,
+            ),
+          ],
         ),
       ];
 }
@@ -85,13 +120,50 @@ class LogInRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [ExampleScreen]
-class ExampleRoute extends PageRouteInfo<void> {
-  const ExampleRoute()
+/// [RoutingLogicScreen]
+class RoutingLogicRoute extends PageRouteInfo<void> {
+  const RoutingLogicRoute({List<PageRouteInfo>? children})
       : super(
-          ExampleRoute.name,
-          path: 'example_screen',
+          RoutingLogicRoute.name,
+          path: 'routing_logic',
+          initialChildren: children,
         );
 
-  static const String name = 'ExampleRoute';
+  static const String name = 'RoutingLogicRoute';
+}
+
+/// generated route for
+/// [ContactsScreen]
+class ContactsRoute extends PageRouteInfo<void> {
+  const ContactsRoute()
+      : super(
+          ContactsRoute.name,
+          path: 'contacts_screen',
+        );
+
+  static const String name = 'ContactsRoute';
+}
+
+/// generated route for
+/// [ChatScreen]
+class ChatRoute extends PageRouteInfo<void> {
+  const ChatRoute()
+      : super(
+          ChatRoute.name,
+          path: 'chat_screen',
+        );
+
+  static const String name = 'ChatRoute';
+}
+
+/// generated route for
+/// [MoreScreen]
+class MoreRoute extends PageRouteInfo<void> {
+  const MoreRoute()
+      : super(
+          MoreRoute.name,
+          path: 'more_screen',
+        );
+
+  static const String name = 'MoreRoute';
 }

@@ -92,6 +92,4 @@ class FirebaseAuthProviderImpl implements FirebaseAuthProvider {
     );
     return userEntity;
   }
-
-
 }

@@ -19,9 +19,14 @@ dependencies:
 
   authentication:
     path: ../features/authentication
-  example:
-    path: ../features/example
-
+  router:
+    path: ../features/router
+  contacts:
+    path: ../features/contacts
+  chat:
+    path: ../features/chat
+  more:
+    path: ../features/more
   auto_route: ^5.0.4
 
 dev_dependencies:

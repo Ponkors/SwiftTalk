@@ -158,7 +158,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
         ),
       );
       _appRouter.replace(
-        const ExampleRoute(),
+        const RoutingLogicRoute(),
       );
     } catch (error) {
       emit(
@@ -195,7 +195,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
       NavigateToMenuPage event,
       Emitter<AuthenticationState> emit,
       ) {
-    _appRouter.replace(const ExampleRoute());
+    _appRouter.replace(const RoutingLogicRoute());
   }
 
   void _navigateToSignInScreen(

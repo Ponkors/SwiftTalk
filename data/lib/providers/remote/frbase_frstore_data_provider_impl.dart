@@ -57,6 +57,14 @@ class FirebaseFirestoreDataProviderImpl implements FirebaseFirestoreDataProvider
       return UserEntity.fromFirebase(user);
     }).toList();
   }
+  
+  @override
+  Future<Stream<QuerySnapshot>> getUserByUserName(String userName) async {
+    return FirebaseFirestore.instance
+        .collection("users")
+        .where("name")
+        .snapshots();
+  }
 
   @override
   Future<void> updateUserRole({

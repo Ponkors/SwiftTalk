@@ -1,28 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:core_ui/core_ui.dart';
 
-class ExampleScreen extends StatefulWidget {
-  const ExampleScreen({super.key});
+class MoreScreen extends StatefulWidget {
+  const MoreScreen({super.key});
 
   @override
-  State<ExampleScreen> createState() => _ExampleScreenState();
+  State<MoreScreen> createState() => _MoreScreenState();
 }
 
-class _ExampleScreenState extends State<ExampleScreen> {
+class _MoreScreenState extends State<MoreScreen> {
   bool isSearching = false;
   TextEditingController searchUserNameController =
-    TextEditingController();
+  TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'ExampleScreen',
+      title: 'More Screen',
       home: Scaffold(
         appBar: CustomAppBar(),
-        bottomNavigationBar: CustomBottomNavigationBar(
-          currentIndex: 0,
-          onTap: (index) {},
-        ),
         body: Container(
           margin: EdgeInsets.symmetric(horizontal: AppDimens.size_10),
           child: Column(
@@ -31,15 +27,15 @@ class _ExampleScreenState extends State<ExampleScreen> {
                 children: [
                   isSearching
                       ? GestureDetector(
-                          onTap: () {
-                            isSearching = false;
-                            searchUserNameController.text = "";
-                            setState(() {});
-                          },
-                          child: Padding(
-                            padding: EdgeInsets.only(right: AppDimens.size_10),
-                            child: Icon(Icons.arrow_back)),
-                      )
+                    onTap: () {
+                      isSearching = false;
+                      searchUserNameController.text = "";
+                      setState(() {});
+                    },
+                    child: Padding(
+                        padding: EdgeInsets.only(right: AppDimens.size_10),
+                        child: Icon(Icons.arrow_back)),
+                  )
                       : Container(),
                   Expanded(
                     child: Container(
@@ -59,8 +55,8 @@ class _ExampleScreenState extends State<ExampleScreen> {
                               child: TextField(
                                 controller: searchUserNameController,
                                 decoration: InputDecoration(border: InputBorder.none,
-                                  hintText: 'Enter username'),
-                          )),
+                                    hintText: 'Enter username'),
+                              )),
                           GestureDetector(
                             onTap: () {
                               if (searchUserNameController.text != "") {

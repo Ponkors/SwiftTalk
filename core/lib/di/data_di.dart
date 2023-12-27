@@ -1,6 +1,8 @@
 import 'package:core/core.dart';
 import 'package:data/data.dart';
 import 'package:data/repositories/auth_repository_impl.dart';
+import 'package:data/repositories/contacts_repository_impl.dart';
+import 'package:data/repositories/chat_repository_impl.dart';
 import 'package:domain/domain.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
@@ -15,7 +17,8 @@ class DataDI {
     _initDataProvider();
     _initGoogleSignIn();
     _initAuthentication();
-
+    _initContacts();
+    _initChat();
   }
 
   Future<void> _initFirebase() async {
@@ -47,6 +50,11 @@ class DataDI {
           () => FirebaseFirestoreDataProviderImpl(
         firebaseFirestore: getIt.get<FirebaseFirestore>(),
       ),
+    );
+    getIt.registerLazySingleton<ChatFirebaseFirestoreDataProvider>(
+        () => ChatFirebaseFirestoreDataProviderImpl(
+          firebaseFirestore: getIt.get<FirebaseFirestore>(),
+        ),
     );
   }
 
@@ -100,6 +108,24 @@ class DataDI {
           () => GetUserFromStorageUseCase(
         authenticationRepository: getIt.get<AuthenticationRepository>(),
       ),
+    );
+  }
+
+  void _initContacts() {
+    getIt.registerLazySingleton<ContactsRepository>(
+        () => ContactsRepositoryImpl(
+            firebaseFirestoreDataProvider: getIt.get<FirebaseFirestoreDataProvider>(),
+            hiveProvider: getIt.get<HiveProvider>(),
+        ),
+    );
+  }
+
+  void _initChat() {
+    getIt.registerLazySingleton<ChatRepository>(
+        () => ChatRepositoryImpl(
+            firebaseFirestore: getIt.get<FirebaseFirestore>(),
+            chatFirebaseFirestoreDataProvider: getIt.get<ChatFirebaseFirestoreDataProvider>(),
+        ),
     );
   }
 }

@@ -30,9 +30,7 @@ class _SignInFormState extends State<SignInForm> {
       child: Form(
         key: _formKey,
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppDimens.padding_20,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: AppDimens.padding_20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[

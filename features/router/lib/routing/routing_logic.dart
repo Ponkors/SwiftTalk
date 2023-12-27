@@ -4,6 +4,8 @@ import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:navigation/navigation.dart';
 import 'package:authentication/authentication.dart';
+import 'package:contacts/contacts.dart';
+import 'package:chat/chat.dart';
 
 class RoutingLogicScreen extends StatelessWidget {
   const RoutingLogicScreen({super.key});
@@ -11,6 +13,7 @@ class RoutingLogicScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AuthenticationBloc authenticationBloc = BlocProvider.of(context);
+    final UserModel authenticatedUser;
     return MultiBlocProvider(
       providers: <BlocProvider>[
         BlocProvider<AuthenticationBloc>(
@@ -24,6 +27,16 @@ class RoutingLogicScreen extends StatelessWidget {
               appRouter: getIt.get<AppRouter>(),
           ),
         ),
+        BlocProvider<ContactsBloc>(
+            create: (_) => ContactsBloc(
+              contactsRepository: getIt.get<ContactsRepository>(),
+            ),
+        ),
+        BlocProvider<ChatBloc>(
+          create: (_) => ChatBloc(
+            chatRepository: getIt.get<ChatRepository>(),
+          ),
+        )
       ],
       child: AutoTabsScaffold(
         animationCurve: Curves.linear,

@@ -4,34 +4,34 @@ class UserEntity {
   final String identifierId;
   final String userName;
   final String email;
-  final String role;
+  final String photoURL;
 
   const UserEntity({
     required this.identifierId,
     required this.userName,
     required this.email,
-    required this.role
+    required this.photoURL,
   });
 
   List<Object?> get props => [
     identifierId,
     userName,
     email,
-    role,
+    photoURL,
   ];
 
   const UserEntity.empty()
       : identifierId = '',
         userName = '',
         email = '',
-        role = '';
+        photoURL = '';
 
   Map<String,dynamic> toJson() {
     return {
       'identifierId': identifierId,
       'name': userName,
       'email': email,
-      'role': role,
+      'photoURL': photoURL,
     };
   }
 
@@ -42,7 +42,16 @@ class UserEntity {
       identifierId: json['uid'] ?? '',
       email: json['email'] ?? '',
       userName: json['name'] ?? '',
-      role: json['role'] ?? '',
+      photoURL: json['photoURL'] ?? '',
+    );
+  }
+
+  factory UserEntity.fromMap(Map<String, dynamic> map) {
+    return UserEntity(
+      identifierId: map['identifierId'] ?? '',
+      userName: map['name'] ?? '',
+      email: map['email'] ?? '',
+      photoURL: map['role'] ?? '',
     );
   }
 

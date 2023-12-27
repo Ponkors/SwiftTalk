@@ -18,7 +18,7 @@ class UserEntityAdapter extends TypeAdapter<UserEntity> {
       identifierId: data['identifierId'] ?? '',
       userName: data['userName'] ?? '',
       email: data['email'] ?? '',
-      role: data['role'] ?? '',
+      photoURL: data['photoURL'] ?? '',
     );
   }
 
@@ -31,7 +31,7 @@ class UserEntityAdapter extends TypeAdapter<UserEntity> {
     writer.write(obj.userName);
     writer.writeString('email');
     writer.write(obj.email);
-    writer.writeString('role');
-    writer.write(obj.role);
+    writer.writeString('photoURL');
+    writer.write(obj.photoURL);
   }
 }

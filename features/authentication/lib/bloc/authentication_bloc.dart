@@ -53,6 +53,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     final UserModel userFromStorage = await _getUserFromStorageUseCase
         .execute(
       const NoParams(),
+
     );
     if (userFromStorage.identifierId == '') {
       emit(
@@ -91,6 +92,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
         state.copyWith(
           statusForm: SubmissionFormSuccess(),
           userModel: userModel,
+          isLogged: true,
         ),
       );
     } on FirebaseAuthException catch (error) {
@@ -123,6 +125,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
         state.copyWith(
           statusForm: SubmissionFormSuccess(),
           userModel: userModel,
+          isLogged: true,
         ),
       );
     } on FirebaseAuthException catch (error) {

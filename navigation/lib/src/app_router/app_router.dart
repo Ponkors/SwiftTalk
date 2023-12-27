@@ -5,6 +5,7 @@ import 'package:router/router.dart';
 import 'package:contacts/contacts.dart';
 import 'package:chat/chat.dart';
 import 'package:more/more.dart';
+import 'package:domain/domain.dart';
 
 part 'app_router.gr.dart';
 

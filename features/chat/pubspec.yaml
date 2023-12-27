@@ -18,6 +18,10 @@ dependencies:
     path: ../../domain
   navigation:
     path: ../../navigation
+  conversation:
+    path: ../../features/conversation
+  message:
+    path: ../../features/message
 
 dev_dependencies:
   flutter_test:

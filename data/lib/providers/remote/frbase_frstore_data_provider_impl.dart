@@ -10,6 +10,16 @@ class FirebaseFirestoreDataProviderImpl implements FirebaseFirestoreDataProvider
 
 
   @override
+  Future<List<Map<String, dynamic>>> getContacts() async {
+    final userQuerySnap = await _firebaseFirestore.collection('users').get();
+    return userQuerySnap.docs
+        .map((queryDocSnap) => queryDocSnap.data())
+        .toList();
+  }
+
+
+
+  @override
   Future<UserEntity> getUser({
     required String uid,
   }) async {
@@ -20,7 +30,7 @@ class FirebaseFirestoreDataProviderImpl implements FirebaseFirestoreDataProvider
       identifierId: uid,
       email: userData?['email'] ?? '',
       userName: userData?['name'] ?? '',
-      role: userData?['role'] ?? '',
+      photoURL: userData?['photoURL'] ?? '',
     );
     return userEntity;
   }
@@ -57,7 +67,7 @@ class FirebaseFirestoreDataProviderImpl implements FirebaseFirestoreDataProvider
       return UserEntity.fromFirebase(user);
     }).toList();
   }
-  
+
   @override
   Future<Stream<QuerySnapshot>> getUserByUserName(String userName) async {
     return FirebaseFirestore.instance

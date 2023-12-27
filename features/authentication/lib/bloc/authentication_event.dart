@@ -38,7 +38,7 @@ class ResetPasswordSubmitted extends AuthenticationEvent {
   final String email;
 
   ResetPasswordSubmitted({
-    required this.email,
+    required this.email
   });
 }
 

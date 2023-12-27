@@ -38,13 +38,13 @@ class _$AppRouter extends RootStackRouter {
     ContactsRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const ContactsScreen(),
+        child: ContactsScreen(),
       );
     },
     ChatRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const ChatScreen(),
+        child: ChatScreen(),
       );
     },
     MoreRoute.name: (routeData) {

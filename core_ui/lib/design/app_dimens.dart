@@ -1,0 +1,55 @@
+class AppDimens {
+  static const double padding5 = 5.0;
+  static const double padding8 = 8.0;
+  static const double padding10 = 10.0;
+  static const double padding15 = 15.0;
+  static const double padding16 = 16.0;
+  static const double padding20 = 20.0;
+  static const double padding25 = 25.0;
+  static const double padding30 = 30.0;
+  static const double padding40 = 40.0;
+  static const double padding45 = 45.0;
+  static const double padding60 = 60.0;
+  static const double padding70 = 70.0;
+
+  static const double size1 = 1.0;
+  static const double size2 = 2.0;
+  static const double size4 = 4.0;
+  static const double size5 = 5.0;
+  static const double size8 = 8.0;
+  static const double size10 = 10.0;
+  static const double size20 = 20.0;
+  static const double size25 = 25.0;
+  static const double size30 = 30.0;
+  static const double size40 = 40.0;
+  static const double size48 = 48.0;
+  static const double size50 = 50.0;
+  static const double size55 = 55.0;
+  static const double size60 = 60.0;
+  static const double size63 = 63.0;
+  static const double size65 = 65.0;
+  static const double size100 = 100.0;
+  static const double size110 = 110.0;
+  static const double size115 = 115.0;
+  static const double size120 = 120.0;
+  static const double size140 = 140.0;
+  static const double size160 = 160.0;
+  static const double size170 = 170.0;
+  static const double size200 = 200.0;
+  static const double size215 = 215.0;
+  static const double size220 = 220.0;
+  static const double size245 = 245.0;
+  static const double size280 = 280.0;
+  static const double size335 = 335.0;
+  static const double size340 = 340.0;
+  static const double size350 = 350.0;
+  static const double size360 = 360.0;
+  static const double size400 = 400.0;
+  static const double size450 = 450.0;
+
+  static const double radius6 = 6.0;
+  static const double radius10 = 10.0;
+  static const double radius16 = 16.0;
+  static const double radius20 = 20.0;
+  static const double radius30 = 30.0;
+}

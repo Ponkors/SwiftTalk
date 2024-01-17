@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "102935724771",
+    "firebase_url": "https://swifttalk-5757d-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "swifttalk-5757d",
+    "storage_bucket": "swifttalk-5757d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:102935724771:android:b29d5f4fca1f437aad3bd6",
+        "android_client_info": {
+          "package_name": "com.example.swift_talk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "102935724771-h960c10f9mfu4ourtjtvpg2o1kd6nfc1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.swift_talk",
+            "certificate_hash": "8385ce559d8e1d72b1b8f56865273362b614094a"
+          }
+        },
+        {
+          "client_id": "102935724771-er0il30j2s1p2om14t7dms9hqf3rtqdr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDudgYCYV33EEttJ05SPOKil_EH7INRqSY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "102935724771-724g42t8an23h48tt6ufdtdcgb4o53am.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "102935724771-hqmj8gbu7j3o8bkkh263t8h5vs75t9ra.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.swiftTalk"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

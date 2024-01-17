@@ -55,7 +55,9 @@ class ConversationView extends StatelessWidget {
         ), // TODO временно для проверки
         actions: [
           CircleAvatar(
-            backgroundColor: AppColors.green,
+            backgroundImage: receiver.photoURL.isNotEmpty
+                ? NetworkImage(receiver.photoURL)
+                : AssetImage(ImagePaths.defaultPhoto) as ImageProvider<Object>?,
           ),
         ],
       ),

@@ -2,6 +2,7 @@ class ImagePaths {
   static const String _libImages = 'packages/core_ui/assets/images/';
 
   static const String walkthroughImage = '${_libImages}illustration.png';
+  static const String defaultPhoto = '${_libImages}default-photo.png';
 
   // static const String homeImage = '${_libImages}home.png';
   // static const String logoImage = '${_libImages}logo.svg';

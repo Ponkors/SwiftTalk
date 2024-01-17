@@ -51,7 +51,7 @@ class _ConversationSenderViewState extends State<ConversationSenderView> {
             ),
           ),
         ),
-        Expanded(
+        Container(
           child: BlocConsumer<MessageSenderBloc, MessageSenderState>(
             listener: (context, state) {
               if (state is MessageSentSuccess) {

@@ -60,7 +60,9 @@ class ContactView extends StatelessWidget {
         final contact = contacts.elementAt(index);
         return ListTile(
           leading: CircleAvatar(
-            backgroundColor: AppColors.green,
+            backgroundImage: contact.photoURL.isNotEmpty
+                ? NetworkImage(contact.photoURL)
+                : AssetImage(ImagePaths.defaultPhoto) as ImageProvider<Object>?,
           ),
           title: Text(contact.userName),
           subtitle: Text(contact.email),

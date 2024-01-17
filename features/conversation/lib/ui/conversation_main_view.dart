@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:core/core.dart';
 import 'package:data/data.dart';
 import 'package:domain/domain.dart';
@@ -20,36 +21,45 @@ class ConversationMainView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        SizedBox(
-          height: MediaQuery.of(context).size.height -
-              AppBar().preferredSize.height - 20,
-          child: BlocProvider(
-            create: (context) => MessageReceiverBloc(
-              messageRepository: getIt.get<MessageRepository>(),
-            )..add(MessageRequested(conversationId: conversationId)),
-            child: ConversationMessageView(
-              receiver: receiver,
-              loginUser: loginUser,
-            ),
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height - 170,
+          color: Colors.red,
+          child: Column(
+            children: [
+              Expanded(
+                child: BlocProvider(
+                  create: (context) => MessageReceiverBloc(
+                    messageRepository: getIt.get<MessageRepository>(),
+                  )..add(MessageRequested(conversationId: conversationId)),
+                  child: ConversationMessageView(
+                    receiver: receiver,
+                    loginUser: loginUser,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
-        Container(
-          height: 50,
-          padding: const EdgeInsets.all(5),
-          child: BlocProvider(
-            create: (context) => MessageSenderBloc(
-              messageRepository: getIt.get<MessageRepository>(),
-            ),
-            child: ConversationSenderView(
-              conversationId: conversationId,
-              senderUID: loginUser.identifierId,
-              receiverUID: receiver.identifierId,
-            ),
+      ),
+      bottomNavigationBar: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.width > 600 ? 100 : 50,
+        margin: const EdgeInsets.only(bottom: 15),
+        padding: const EdgeInsets.all(5),
+        child: BlocProvider(
+          create: (context) => MessageSenderBloc(
+            messageRepository: getIt.get<MessageRepository>(),
           ),
-        )
-      ],
+          child: ConversationSenderView(
+            conversationId: conversationId,
+            senderUID: loginUser.identifierId,
+            receiverUID: receiver.identifierId,
+          ),
+        ),
+      ),
     );
   }
 }

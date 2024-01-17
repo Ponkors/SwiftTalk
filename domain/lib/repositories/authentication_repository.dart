@@ -1,24 +1,8 @@
-import 'package:domain/domain.dart';
+import 'package:data/data.dart';
 
 abstract class AuthenticationRepository {
-  Future<UserModel> signUp({
-    required String userName,
-    required String email,
-    required String password,
-  });
-
-  Future<UserModel> signIn({
-    required String email,
-    required String password,
-  });
-
-  Future<void> signOut();
-
-  Future<void> resetPassword({
-    required String email,
-  });
-
-  Future<UserModel> getUserFromStorage();
-
-  Future<UserModel> signInWithGoogle();
+  Future<UserEntity?> loginWithGoogle();
+  Stream<bool> isLoggedIn();
+  Stream<UserEntity?> getLoggedInUser();
+  Future<void> logOut();
 }

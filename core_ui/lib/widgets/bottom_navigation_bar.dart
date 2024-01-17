@@ -22,22 +22,21 @@ class CustomBottomNavigationBar extends StatelessWidget {
       return BottomNavigationBarItem(
         icon: currentIndex == CustomBottomNavigationBarItem.values.indexOf(item)
             ? Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(item.label),
-            SizedBox(height: AppDimens.size_5),
-            Icon(Icons.circle, size: AppDimens.size_8),
-          ],
-        )
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(item.label),
+                  SizedBox(height: AppDimens.size5),
+                  Icon(Icons.circle, size: AppDimens.size8),
+                ],
+              )
             : Icon(item.icon),
         label: '',
       );
     }).toList();
-
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: AppDimens.padding_5),
+      padding: EdgeInsets.symmetric(horizontal: AppDimens.padding5),
       child: ClipRRect(
-        borderRadius: BorderRadius.all(Radius.circular(AppDimens.radius_16)),
+        borderRadius: BorderRadius.all(Radius.circular(AppDimens.radius16)),
         child: BottomNavigationBar(
           items: items,
           currentIndex: currentIndex,

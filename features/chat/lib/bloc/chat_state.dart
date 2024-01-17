@@ -1,6 +1,6 @@
 part of 'chat_bloc.dart';
 
-abstract class ChatState extends Equatable {
+sealed class ChatState extends Equatable {
   const ChatState();
 
   @override

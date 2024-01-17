@@ -6,8 +6,8 @@ import 'package:domain/domain.dart';
 import 'package:message/message.dart';
 
 class ConversationMessageView extends StatelessWidget {
-  final UserModel loginUser;
-  final UserModel receiver;
+  final UserEntity loginUser;
+  final UserEntity receiver;
 
   const ConversationMessageView({
     required this.loginUser,

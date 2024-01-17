@@ -10,8 +10,12 @@ class FirebaseFirestoreDataProviderImpl implements FirebaseFirestoreDataProvider
 
 
   @override
-  Future<List<Map<String, dynamic>>> getContacts() async {
-    final userQuerySnap = await _firebaseFirestore.collection('users').get();
+  Future<List<Map<String, dynamic>>> getContacts({
+    required String loginUID,
+  }) async {
+    final userQuerySnap = await _firebaseFirestore.collection('users')
+        .where('identifierId', isNotEqualTo: loginUID)
+        .get();
     return userQuerySnap.docs
         .map((queryDocSnap) => queryDocSnap.data())
         .toList();
@@ -56,17 +60,17 @@ class FirebaseFirestoreDataProviderImpl implements FirebaseFirestoreDataProvider
     }
   }
 
-  @override
-  Future<List<UserEntity>> fetchAllUsers() async {
-    final QuerySnapshot<Map<String, dynamic>> dataRef =
-    await _firebaseFirestore.collection('users').get();
-
-    return dataRef.docs.map((
-        QueryDocumentSnapshot<Map<String, dynamic>> user,
-        ) {
-      return UserEntity.fromFirebase(user);
-    }).toList();
-  }
+  // @override
+  // Future<List<UserEntity>> fetchAllUsers() async {
+  //   final QuerySnapshot<Map<String, dynamic>> dataRef =
+  //   await _firebaseFirestore.collection('users').get();
+  //
+  //   return dataRef.docs.map((
+  //       QueryDocumentSnapshot<Map<String, dynamic>> user,
+  //       ) {
+  //     return UserEntity.fromFirebase(user);
+  //   }).toList();
+  // }
 
   @override
   Future<Stream<QuerySnapshot>> getUserByUserName(String userName) async {

@@ -23,7 +23,7 @@ class _ExampleScreenState extends State<ExampleScreen> {
           onTap: (index) {},
         ),
         body: Container(
-          margin: EdgeInsets.symmetric(horizontal: AppDimens.size_10),
+          margin: EdgeInsets.symmetric(horizontal: AppDimens.size10),
           child: Column(
             children: [
               Row(
@@ -36,21 +36,21 @@ class _ExampleScreenState extends State<ExampleScreen> {
                             setState(() {});
                           },
                           child: Padding(
-                            padding: EdgeInsets.only(right: AppDimens.size_10),
+                            padding: EdgeInsets.only(right: AppDimens.size10),
                             child: Icon(Icons.arrow_back)),
                       )
                       : Container(),
                   Expanded(
                     child: Container(
-                      margin: EdgeInsets.symmetric(vertical: AppDimens.size_10),
-                      padding: EdgeInsets.symmetric(horizontal: AppDimens.size_10),
+                      margin: EdgeInsets.symmetric(vertical: AppDimens.size10),
+                      padding: EdgeInsets.symmetric(horizontal: AppDimens.size10),
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: AppColors.grey,
-                          width: AppDimens.size_1,
+                          width: AppDimens.size1,
                           style: BorderStyle.solid,
                         ),
-                        borderRadius: BorderRadius.circular(AppDimens.size_10),
+                        borderRadius: BorderRadius.circular(AppDimens.size10),
                       ),
                       child: Row(
                         children: [

@@ -1,6 +1,6 @@
 part of 'conversation_bloc.dart';
 
-abstract class ConversationEvent extends Equatable {
+sealed class ConversationEvent extends Equatable {
   const ConversationEvent();
 
   @override
@@ -8,8 +8,8 @@ abstract class ConversationEvent extends Equatable {
 }
 
 class ConversationDetailRequested extends ConversationEvent {
-  final UserModel loginUser;
-  final UserModel receiver;
+  final UserEntity loginUser;
+  final UserEntity receiver;
   const ConversationDetailRequested({
     required this.loginUser,
     required this.receiver,

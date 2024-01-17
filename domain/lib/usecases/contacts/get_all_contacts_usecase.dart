@@ -7,7 +7,7 @@ class GetAllContactsUseCase {
 
   GetAllContactsUseCase(this._usersRepository);
 
-  Future<List<UserEntity>> execute() async {
-    return await _usersRepository.getContacts();
+  Future<List<UserEntity>> execute(String loginUID) async {
+    return await _usersRepository.getContacts(loginUID: loginUID);
   }
 }

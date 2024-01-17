@@ -1,40 +1,21 @@
 part of 'authentication_bloc.dart';
 
-class AuthenticationState {
-  final UserModel userModel;
-  final bool isLogged;
-  final SubmissionStatusForm statusForm;
-  final bool isSignInPage;
-  final bool isResetPasswordPage;
+@immutable
+sealed class AuthenticationState {}
 
-  AuthenticationState({
-    required this.userModel,
-    required this.isLogged,
-    required this.statusForm,
-    required this.isSignInPage,
-    required this.isResetPasswordPage,
+class AuthenticationInitial extends AuthenticationState {}
+
+class AuthenticationSuccess extends AuthenticationState {
+  final UserEntity user;
+
+  AuthenticationSuccess({
+    required this.user,
   });
-
-  AuthenticationState.empty() :
-        userModel = const UserModel.empty(),
-        isLogged = false,
-        statusForm = const InitSubmitStatus(),
-        isSignInPage = true,
-        isResetPasswordPage = false;
-
-  AuthenticationState copyWith({
-    UserModel? userModel,
-    bool? isLogged,
-    SubmissionStatusForm? statusForm,
-    bool? isSignInPage,
-    bool? isResetPasswordPage,
-  }) {
-    return AuthenticationState(
-      userModel: userModel ?? this.userModel,
-      isLogged: isLogged ?? this.isLogged,
-      statusForm: statusForm ?? this.statusForm,
-      isSignInPage: isSignInPage ?? this.isSignInPage,
-      isResetPasswordPage: isResetPasswordPage ?? this.isResetPasswordPage,
-    );
-  }
 }
+
+class AuthenticationRemoveSuccess extends AuthenticationState {}
+
+class AuthenticationInProgress extends AuthenticationState {}
+
+class AuthenticationFailure extends AuthenticationState {}
+

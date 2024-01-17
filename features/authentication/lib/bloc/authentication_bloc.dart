@@ -1,233 +1,91 @@
-import 'package:authentication/bloc/submit_status.dart';
+import 'dart:async';
+import 'dart:developer';
 import 'package:core/core.dart';
+import 'package:data/data.dart';
 import 'package:domain/domain.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:navigation/navigation.dart';
 import 'package:authentication/authentication.dart';
 
 part 'authentication_event.dart';
 part 'authentication_state.dart';
 
-class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
-  final SignInUseCase _signInUseCase;
-  final SignUpUseCase _signUpUseCase;
-  final SignOutUseCase _signOutUseCase;
-  final SignInWithGoogleUseCase _signInWithGoogleUseCase;
-  final ResetPasswordUseCase _resetPasswordUseCase;
-  final GetUserFromStorageUseCase _getUserFromStorageUseCase;
-  final AppRouter _appRouter;
+class AuthenticationBloc
+    extends Bloc<AuthenticationEvent, AuthenticationState> {
+
+  final AuthenticationRepository authenticationRepository;
+  late StreamSubscription isAuthenticationStates;
 
   AuthenticationBloc({
-    required SignInUseCase signInUseCase,
-    required SignUpUseCase signUpUseCase,
-    required SignOutUseCase signOutUseCase,
-    required SignInWithGoogleUseCase signInWithGoogleUseCase,
-    required ResetPasswordUseCase resetPasswordUseCase,
-    required GetUserFromStorageUseCase getUserFromStorageUseCase,
-    required AppRouter appRouter,
-  })  : _signInUseCase = signInUseCase,
-        _signUpUseCase = signUpUseCase,
-        _signOutUseCase = signOutUseCase,
-        _signInWithGoogleUseCase = signInWithGoogleUseCase,
-        _resetPasswordUseCase = resetPasswordUseCase,
-        _getUserFromStorageUseCase = getUserFromStorageUseCase,
-        _appRouter = appRouter,
-        super(
-        AuthenticationState.empty(),
-      ) {
-    on<InitAuthentication>(_initAuthentication);
-    on<SignInSubmitted>(_signInSubmitted);
-    on<SignUpSubmitted>(_signUpSubmitted);
-    on<SignOutSubmitted>(_signOutSubmitted);
-    on<SignInWithGoogleSubmitted>(_signInWithGoogle);
-    on<ResetPasswordSubmitted>(_resetPassword);
-    on<NavigateToMenuPage>(_navigateToMenuPage);
-    on<NavigateToSignInScreen>(_navigateToSignInScreen);
-    on<ChangeSignInPage>(_changeSignPage);
-    on<ChangeResetPasswordPage>(_changeResetPasswordPage);
+    required this.authenticationRepository,
+  }) : super(AuthenticationInitial()) {
+    on<AuthenticationWithGooglePressed>(_onAuthenticationWithGoogle);
+    on<AuthenticationVerified>(_onAuthenticationVerified);
+    on<AuthenticationStateChanged>(_onAuthenticationStateChanged);
+    on<AuthenticationRemoved>(_onAuthenticationRemoved);
   }
 
-  Future<void> _initAuthentication(
-      InitAuthentication event,
-      Emitter<AuthenticationState> emit,
-      ) async {
-    final UserModel userFromStorage = await _getUserFromStorageUseCase
-        .execute(
-      const NoParams(),
-
-    );
-    if (userFromStorage.identifierId == '') {
-      emit(
-        state.copyWith(
-          userModel: const UserModel.empty(),
-          isLogged: false,
-        ),
-      );
-    } else {
-      emit(
-        state.copyWith(
-          isLogged: true,
-          userModel: userFromStorage,
-        ),
-      );
-    }
+  @override
+  Future<void> close() {
+    isAuthenticationStates.cancel();
+    return super.close();
   }
 
-  Future<void> _signInSubmitted(
-      SignInSubmitted event,
-      Emitter<AuthenticationState> emit,
-      ) async {
-    emit(
-      state.copyWith(
-        statusForm: FormSubmitting(),
-      ),
-    );
+  Future<void> _onAuthenticationWithGoogle(
+    AuthenticationWithGooglePressed event,
+    Emitter<AuthenticationState> emit,
+  ) async {
     try {
-      final UserModel userModel = await _signInUseCase.execute(
-        SignInParameters(
-          email: event.email,
-          password: event.password,
-        ),
-      );
+      emit(AuthenticationInProgress());
+      final authenticatedUser =
+          await authenticationRepository.loginWithGoogle();
+      log('Logged user: ${authenticatedUser?.userName}, '
+          'email: ${authenticatedUser?.email}');
       emit(
-        state.copyWith(
-          statusForm: SubmissionFormSuccess(),
-          userModel: userModel,
-          isLogged: true,
-        ),
+        authenticatedUser == null
+            ? AuthenticationFailure()
+            : AuthenticationSuccess(user: authenticatedUser),
       );
-    } on FirebaseAuthException catch (error) {
-      emit(
-        state.copyWith(
-          statusForm: SubmissionFormFailed(error.message),
-        ),
-      );
+    } catch (any) {
+      log('Error while login with google ${any.toString()}');
+      emit(AuthenticationFailure());
     }
   }
 
-  Future<void> _signUpSubmitted(
-      SignUpSubmitted event,
-      Emitter<AuthenticationState> emit,
-      ) async {
-    emit(
-      state.copyWith(
-        statusForm: FormSubmitting(),
-      ),
-    );
+  void _onAuthenticationVerified(
+      AuthenticationVerified event, Emitter<AuthenticationState> emit) {
     try {
-      final UserModel userModel = await _signUpUseCase.execute(
-        SignUpParameters(
-          email: event.email,
-          password: event.password,
-          userName: event.userName,
-        ),
-      );
-      emit(
-        state.copyWith(
-          statusForm: SubmissionFormSuccess(),
-          userModel: userModel,
-          isLogged: true,
-        ),
-      );
-    } on FirebaseAuthException catch (error) {
-      emit(
-        state.copyWith(
-          statusForm: SubmissionFormFailed(error.message),
-        ),
-      );
+      emit(AuthenticationInProgress());
+      isAuthenticationStates =
+          authenticationRepository.getLoggedInUser().listen((user) {
+        add(AuthenticationStateChanged(user: user));
+      });
+    } catch (e) {
+      log('Error while checking for authentication state ${state.toString()}');
+      emit(AuthenticationFailure());
     }
   }
 
-  Future<void> _signOutSubmitted(
-      SignOutSubmitted event,
-      Emitter<AuthenticationState> emit,
-      ) async {
-    await _signOutUseCase.execute(
-      const NoParams(),
-    );
-    emit(state.copyWith(isLogged: false));
+  FutureOr<void> _onAuthenticationStateChanged(
+    AuthenticationStateChanged event,
+    Emitter<AuthenticationState> emit,
+  ) {
+    final user = event.user;
+    emit(user == null
+        ? AuthenticationFailure()
+        : AuthenticationSuccess(user: user));
   }
 
-  Future<void> _signInWithGoogle(
-      SignInWithGoogleSubmitted event,
-      Emitter<AuthenticationState> emit,
-      ) async {
+  FutureOr<void> _onAuthenticationRemoved(
+    AuthenticationRemoved event,
+    Emitter<AuthenticationState> emit,
+  ) async {
     try {
-      final UserModel user = await _signInWithGoogleUseCase.execute(
-        const NoParams(),
-      );
-      emit(
-        state.copyWith(
-          userModel: user,
-        ),
-      );
-      _appRouter.replace(
-        const RoutingLogicRoute(),
-      );
-    } catch (error) {
-      emit(
-        state.copyWith(
-          statusForm: SubmissionFormFailed(error.toString()),
-        ),
-      );
+      emit(AuthenticationInProgress());
+      await authenticationRepository.logOut();
+    } catch (e) {
+      log('Unknown error while logout ${e.toString()}');
+      AuthenticationFailure();
     }
-  }
-
-
-
-  Future<void> _resetPassword(
-      ResetPasswordSubmitted event,
-      Emitter<AuthenticationState> emit,
-      ) async {
-    try {
-      await _resetPasswordUseCase.execute(event.email);
-      emit(
-        state.copyWith(
-          statusForm: SubmissionFormSuccess(),
-        ),
-      );
-    } on FirebaseAuthException catch (error) {
-      emit(
-        state.copyWith(
-          statusForm: SubmissionFormFailed(error.message),
-        ),
-      );
-    }
-  }
-
-  void _navigateToMenuPage(
-      NavigateToMenuPage event,
-      Emitter<AuthenticationState> emit,
-      ) {
-    _appRouter.replace(const RoutingLogicRoute());
-  }
-
-  void _navigateToSignInScreen(
-      NavigateToSignInScreen event,
-      Emitter<AuthenticationState> emit,
-      ) {
-    _appRouter.replace(const LogInRoute());
-  }
-
-
-  void _changeSignPage(
-      ChangeSignInPage event,
-      Emitter<AuthenticationState> emit,
-      ) {
-    emit(
-      state.copyWith(
-        isSignInPage: !state.isSignInPage,
-      ),
-    );
-  }
-
-  void _changeResetPasswordPage(
-      ChangeResetPasswordPage event,
-      Emitter<AuthenticationState> emit,
-      ) {
-    emit(
-      state.copyWith(
-        isResetPasswordPage: !state.isResetPasswordPage,
-      ),
-    );
   }
 }

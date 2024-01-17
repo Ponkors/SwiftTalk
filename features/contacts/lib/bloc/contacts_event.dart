@@ -1,14 +1,15 @@
 part of 'contacts_bloc.dart';
 
-abstract class ContactsEvent {
+sealed class ContactsEvent {
   const ContactsEvent();
 
   @override
   List<Object> get props => [];
 }
 
-
 class ContactsListRequested extends ContactsEvent {
-  // final String email;
-  const ContactsListRequested();
+  final String loginUID;
+  const ContactsListRequested({
+    required this.loginUID,
+  });
 }

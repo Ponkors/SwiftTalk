@@ -1,11 +1,12 @@
 import 'package:core/core.dart';
+import 'package:data/data.dart';
 import 'dart:convert';
 import 'package:domain/domain.dart';
 
 class ConversationModel extends Equatable {
   final String? id;
-  final UserModel creator;
-  final UserModel receiver;
+  final UserEntity creator;
+  final UserEntity receiver;
   final List<String> members;
 
   const ConversationModel({
@@ -20,8 +21,8 @@ class ConversationModel extends Equatable {
 
   ConversationModel copyWith({
     String? id,
-    UserModel? creator,
-    UserModel? receiver,
+    UserEntity? creator,
+    UserEntity? receiver,
     List<String>? members,
   }) {
     return ConversationModel(
@@ -44,9 +45,9 @@ class ConversationModel extends Equatable {
   factory ConversationModel.fromMap(Map<String, dynamic> map) {
     return ConversationModel(
       id: map[ConversationKey.id]?.toString(),
-      creator: UserModel.fromMap(map[ConversationKey.creator]
+      creator: UserEntity.fromMap(map[ConversationKey.creator]
           as Map<String, dynamic>),
-      receiver: UserModel.fromMap(map[ConversationKey.receiver]
+      receiver: UserEntity.fromMap(map[ConversationKey.receiver]
           as Map<String, dynamic>),
       members: List<String>.from(map[ConversationKey.members]
           as List<dynamic>),

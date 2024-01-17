@@ -158,6 +158,13 @@ packages:
       relative: true
     source: path
     version: "0.0.1"
+  conversation:
+    dependency: transitive
+    description:
+      path: "features/conversation"
+      relative: true
+    source: path
+    version: "0.0.1"
   convert:
     dependency: transitive
     description:
@@ -569,6 +576,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.5.0"
+  message:
+    dependency: transitive
+    description:
+      path: "features/message"
+      relative: true
+    source: path
+    version: "0.0.1"
   meta:
     dependency: transitive
     description:

@@ -8,44 +8,51 @@ import 'package:conversation/ui/conversation_main_view.dart';
 
 class ConversationScreen extends StatelessWidget {
   final String? conversationId;
-  final UserModel sender;
-  final UserModel receiver;
+  final UserEntity sender;
+  final UserEntity receiver;
 
   const ConversationScreen({
     this.conversationId,
     required this.sender,
     required this.receiver,
     Key? key,
-  }): super(key: key);
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<ConversationBloc>(context).add(ConversationDetailRequested(
-      loginUser: sender,
-      receiver: receiver,
-    ));
-    return ConversationView(
-      loginUser: sender,
-      receiver: receiver,
+    return BlocProvider(
+      create: (context) => ConversationBloc(
+        conversationRepository: getIt.get<ConversationRepository>(),
+      )..add(ConversationDetailRequested(
+          loginUser: sender,
+          receiver: receiver,
+        )),
+      child: ConversationView(
+        loginUser: sender,
+        receiver: receiver,
+      ),
     );
   }
 }
 
 class ConversationView extends StatelessWidget {
-  final UserModel loginUser;
-  final UserModel receiver;
+  final UserEntity loginUser;
+  final UserEntity receiver;
 
   const ConversationView({
     required this.loginUser,
     required this.receiver,
     Key? key,
-  }): super(key: key);
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(receiver.userName),
+        title: Text(
+          receiver.userName,
+          style: TextStyle(color: Colors.red),
+        ), // TODO временно для проверки
         actions: [
           CircleAvatar(
             backgroundColor: AppColors.green,
@@ -81,4 +88,3 @@ class ConversationView extends StatelessWidget {
     );
   }
 }
-

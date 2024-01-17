@@ -7,8 +7,11 @@ class WalkthroughForm extends StatelessWidget {
   final String text;
   final String mainText;
 
-  const WalkthroughForm(
-      {required this.image, required this.text, required this.mainText});
+  const WalkthroughForm({
+    required this.image,
+    required this.text,
+    required this.mainText,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +19,7 @@ class WalkthroughForm extends StatelessWidget {
       body: Stack(
         children: [
           Positioned.fill(
-            child: WalkthroughGraphicWidget(imagePath: image),
+            child: Image.asset(image),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -26,12 +29,11 @@ class WalkthroughForm extends StatelessWidget {
                 titleText: text,
                 mainText: mainText,
               ),
-              SizedBox(height: 50),
+              SizedBox(height: AppDimens.size50),
               WalkthroughButton(() {
-
                 AutoRouter.of(context).pushNamed('check_auth_screen');
               }),
-              SizedBox(height: 30),
+              SizedBox(height: AppDimens.size30),
             ],
           ),
         ],
@@ -40,7 +42,7 @@ class WalkthroughForm extends StatelessWidget {
   }
 }
 
-final List<Map<String, dynamic>> pages = [
+const List<Map<String, dynamic>> pages = [
   {
     'image': ImagePaths.walkthroughImage,
     'text': 'Connect easily with your family and friends over countries',

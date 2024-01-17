@@ -6,15 +6,18 @@ class WalkthroughTextWidget extends StatelessWidget {
   final String titleText;
   final String mainText;
 
-  WalkthroughTextWidget({required this.titleText, required this.mainText});
+  WalkthroughTextWidget({
+    required this.titleText,
+    required this.mainText,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 25, right: 25),
-      padding: EdgeInsets.only(left: 25, right: 25),
-      height: AppDimens.size_170,
-      width: AppDimens.size_400,
+      margin: EdgeInsets.symmetric(horizontal: AppDimens.padding25),
+      padding: EdgeInsets.symmetric(horizontal: AppDimens.padding25),
+      height: AppDimens.size170,
+      width: AppDimens.size400,
       child: Column(
         children: [
           Text(
@@ -25,15 +28,15 @@ class WalkthroughTextWidget extends StatelessWidget {
               fontWeight: FontWeight.w700,
             ),
           ),
-          SizedBox(height: 20),
+          SizedBox(height: AppDimens.size20),
           Text(
             mainText,
             textAlign: TextAlign.center,
             style: GoogleFonts.gothicA1(
               color: AppColors.black,
-              textStyle: AppFonts.s16_w400,
+              fontSize: 28,
             ),
-          )
+          ),
         ],
       ),
     );

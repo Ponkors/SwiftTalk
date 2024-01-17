@@ -9,7 +9,7 @@ class LoadingIndicator extends StatelessWidget {
     return const Center(
       child: CupertinoActivityIndicator(
         color: AppColors.grey,
-        radius: AppDimens.radius_16,
+        radius: AppDimens.radius16,
       ),
     );
   }

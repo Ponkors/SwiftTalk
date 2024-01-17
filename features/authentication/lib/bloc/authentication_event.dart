@@ -1,65 +1,22 @@
 part of 'authentication_bloc.dart';
 
-abstract class AuthenticationEvent {
-  const AuthenticationEvent();
-}
+@immutable
+sealed class AuthenticationEvent {}
 
-class InitAuthentication extends AuthenticationEvent {
-  InitAuthentication();
-}
+class AuthenticationWithGooglePressed extends AuthenticationEvent {}
 
-class SignInSubmitted extends AuthenticationEvent {
-  final String email;
-  final String password;
+class AuthenticationVerified extends AuthenticationEvent {}
 
-  SignInSubmitted({
-    required this.email,
-    required this.password,
+class AuthenticationStateChanged extends AuthenticationEvent {
+  final UserEntity? user;
+
+  AuthenticationStateChanged({
+    this.user,
   });
 }
 
-class SignUpSubmitted extends AuthenticationEvent {
-  final String userName;
-  final String email;
-  final String password;
+class AuthenticationRemoved extends AuthenticationEvent {}
 
-  SignUpSubmitted({
-    required this.userName,
-    required this.email,
-    required this.password,
-  });
-}
 
-class SignOutSubmitted extends AuthenticationEvent {
-  SignOutSubmitted();
-}
-
-class ResetPasswordSubmitted extends AuthenticationEvent {
-  final String email;
-
-  ResetPasswordSubmitted({
-    required this.email
-  });
-}
-
-class NavigateToMenuPage extends AuthenticationEvent {
-  NavigateToMenuPage();
-}
-
-class NavigateToSignInScreen extends AuthenticationEvent {
-  NavigateToSignInScreen();
-}
-
-class ChangeSignInPage extends AuthenticationEvent {
-  ChangeSignInPage();
-}
-
-class ChangeResetPasswordPage extends AuthenticationEvent {
-  ChangeResetPasswordPage();
-}
-
-class SignInWithGoogleSubmitted extends AuthenticationEvent {
-  SignInWithGoogleSubmitted();
-}
 
 

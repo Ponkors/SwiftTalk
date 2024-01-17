@@ -11,7 +11,7 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
   final ContactsRepository contactsRepository;
 
   ContactsBloc({
-      required this.contactsRepository,
+    required this.contactsRepository,
   }) : super(ContactInitial()) {
     on<ContactsListRequested>(_onContactsListRequested);
   }
@@ -23,7 +23,7 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
     try {
       emit(ContactLoadInProgress());
       final contacts =
-        await contactsRepository.getContacts();
+        await contactsRepository.getContacts(loginUID: event.loginUID);
       emit(ContactLoadSuccess(contacts: contacts));
     } catch (e) {
       log('Error when loading contact ${e.toString()}');

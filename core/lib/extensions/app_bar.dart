@@ -10,7 +10,7 @@ extension CustomAppBarItemEx on CustomAppBarItem {
       case CustomAppBarItem.more:
         return 'More';
       default:
-        return 'Change default';
+        return 'Default';
     }
   }
 }

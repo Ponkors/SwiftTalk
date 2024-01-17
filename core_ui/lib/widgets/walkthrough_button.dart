@@ -14,11 +14,11 @@ class WalkthroughButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         primary: AppColors.blue,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppDimens.size_25),
+          borderRadius: BorderRadius.circular(AppDimens.size25),
         ),
         minimumSize: Size(
-            AppDimens.size_360,
-            AppDimens.size_50,
+            AppDimens.size360,
+            AppDimens.size50,
         ),
       ),
       child: Text(

@@ -24,13 +24,13 @@ class AppTextField extends StatelessWidget {
       shadowColor: AppColors.lightGrey,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
-          Radius.circular(AppDimens.radius_16),
+          Radius.circular(AppDimens.radius16),
         ),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(
-          horizontal: AppDimens.padding_20,
-          vertical: AppDimens.padding_10,
+          horizontal: AppDimens.padding20,
+          vertical: AppDimens.padding10,
         ),
         child: TextFormField(
           obscureText: obscureText,
@@ -39,12 +39,12 @@ class AppTextField extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 icon,
-                SizedBox(width: AppDimens.size_10),
+                SizedBox(width: AppDimens.size10),
               ],
             ),
             prefixIconConstraints: BoxConstraints(
-              minWidth: AppDimens.size_20,
-              minHeight: AppDimens.size_20,
+              minWidth: AppDimens.size20,
+              minHeight: AppDimens.size20,
             ),
             hintText: hintText,
             focusedBorder: UnderlineInputBorder(

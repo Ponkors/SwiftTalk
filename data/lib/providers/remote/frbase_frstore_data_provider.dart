@@ -2,8 +2,10 @@ import 'package:data/data.dart';
 
 abstract class FirebaseFirestoreDataProvider {
 
-  Future<List<Map<String, dynamic>>> getContacts();
-  Future<List<UserEntity>> fetchAllUsers();
+  Future<List<Map<String, dynamic>>> getContacts({
+    required String loginUID,
+  });
+  // Future<List<UserEntity>> fetchAllUsers();
   Future<void> updateUserRole({
     required String uid,
     required String role,

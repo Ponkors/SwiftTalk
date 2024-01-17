@@ -11,12 +11,12 @@ class CategoryTabItem extends StatelessWidget {
     final MediaQueryData mediaQueryData = MediaQuery.of(context);
     return InkWell(
       splashColor: AppColors.blue,
-      borderRadius: const BorderRadius.all(Radius.circular(AppDimens.radius_20)),
+      borderRadius: const BorderRadius.all(Radius.circular(AppDimens.radius20)),
       onTap: () {},
       child: Card(
         shadowColor: AppColors.lightGrey,
         shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(AppDimens.size_25)),
+          borderRadius: BorderRadius.all(Radius.circular(AppDimens.size25)),
         ),
         child: Container(
           width: mediaQueryData.size.width,
@@ -25,7 +25,7 @@ class CategoryTabItem extends StatelessWidget {
           child: Row(
             children: <Widget>[
               Icon(Icons.person),
-              SizedBox(width: AppDimens.size_5,),
+              SizedBox(width: AppDimens.size5,),
               Text(titleText)
             ],
           ),

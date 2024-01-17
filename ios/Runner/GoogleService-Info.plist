@@ -6,6 +6,8 @@
 	<string>102935724771-hqmj8gbu7j3o8bkkh263t8h5vs75t9ra.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
 	<string>com.googleusercontent.apps.102935724771-hqmj8gbu7j3o8bkkh263t8h5vs75t9ra</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>102935724771-h960c10f9mfu4ourtjtvpg2o1kd6nfc1.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyAQXoH5KlPIdPI-6o7NGnfBU1soEjs77VM</string>
 	<key>GCM_SENDER_ID</key>
@@ -30,5 +32,7 @@
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:102935724771:ios:3ae4574dd81dde8ead3bd6</string>
+	<key>DATABASE_URL</key>
+	<string>https://swifttalk-5757d-default-rtdb.europe-west1.firebasedatabase.app</string>
 </dict>
 </plist>

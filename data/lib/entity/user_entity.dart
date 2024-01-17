@@ -1,64 +1,62 @@
+import 'dart:convert';
 import 'package:core/core.dart';
 
-class UserEntity {
+class UserEntity extends Equatable {
   final String identifierId;
   final String userName;
   final String email;
   final String photoURL;
 
-  const UserEntity({
+   UserEntity({
     required this.identifierId,
     required this.userName,
     required this.email,
     required this.photoURL,
   });
 
-  List<Object?> get props => [
-    identifierId,
-    userName,
-    email,
-    photoURL,
-  ];
+  UserEntity copyWith({
+    String? identifierId,
+    String? userName,
+    String? email,
+    String? photoURL,
+  }) {
+    return UserEntity(
+      identifierId: identifierId ?? this.identifierId,
+      userName: userName ?? this.userName,
+      email: email ?? this.email,
+      photoURL: photoURL ?? this.photoURL,
+    );
+  }
 
-  const UserEntity.empty()
-      : identifierId = '',
-        userName = '',
-        email = '',
-        photoURL = '';
 
-  Map<String,dynamic> toJson() {
-    return {
+  List<Object> get props => [identifierId, userName, email, photoURL];
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic> {
       'identifierId': identifierId,
-      'name': userName,
+      'userName': userName,
       'email': email,
       'photoURL': photoURL,
     };
   }
 
-  factory UserEntity.fromJson(
-      Map<String, dynamic> json,
-      ) {
-    return UserEntity(
-      identifierId: json['uid'] ?? '',
-      email: json['email'] ?? '',
-      userName: json['name'] ?? '',
-      photoURL: json['photoURL'] ?? '',
-    );
-  }
-
   factory UserEntity.fromMap(Map<String, dynamic> map) {
     return UserEntity(
-      identifierId: map['identifierId'] ?? '',
-      userName: map['name'] ?? '',
-      email: map['email'] ?? '',
-      photoURL: map['role'] ?? '',
+      identifierId: map['identifierId']?.toString() ?? '',
+      userName: map['userName']?.toString() ?? '',
+      email: map['email']?.toString() ?? '',
+      photoURL: map['photoURL']?.toString() ?? '',
     );
   }
 
-  factory UserEntity.fromFirebase(
-      DocumentSnapshot<Map<String, dynamic>> document,
-      ) {
-    final Map<String, dynamic> data = document.data() as Map<String, dynamic>;
-    return UserEntity.fromJson(data);
+  String toJson() => json.encode(toMap());
+
+  factory UserEntity.fromJson(String source) =>
+      UserEntity.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String toString() {
+    return 'UserEntity(identifierId: $identifierId, userName: $userName, email: $email,'
+        'photoURL: $photoURL)';
   }
 }

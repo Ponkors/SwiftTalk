@@ -1,6 +1,6 @@
 part of 'message_bloc_receiver.dart';
 
-abstract class MessageReceiverState extends Equatable {
+sealed class MessageReceiverState extends Equatable {
   const MessageReceiverState();
 
   @override

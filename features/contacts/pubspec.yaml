@@ -19,6 +19,9 @@ dependencies:
   navigation:
     path: ../../navigation
 
+  conversation:
+    path: ../conversation
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

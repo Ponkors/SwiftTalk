@@ -5,12 +5,16 @@ final AppDI appDi = AppDI();
 
 class AppDI {
   void initDependencies() {
-    _setupNavigationDependencies();
+    // _setupNavigationDependencies();
   }
 
-  void _setupNavigationDependencies() {
-    getIt.registerSingleton<AppRouter>(
-      AppRouter(),
-    );
-  }
+  // TODO временно отключил auto_route и пробовал переходить между экранами
+  // с помошью встроенной навигации, для того чтобы проверить передачу инфы
+  // между виджетами.
+
+  // void _setupNavigationDependencies() {
+  //   getIt.registerSingleton<AppRouter>(
+  //     AppRouter(),
+  //   );
+  // }
 }

@@ -102,7 +102,9 @@ class _ChatBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: CircleAvatar(
-        backgroundColor: AppColors.green,
+        backgroundImage: receiver.photoURL.isNotEmpty
+            ? NetworkImage(receiver.photoURL)
+            : AssetImage(ImagePaths.defaultPhoto) as ImageProvider<Object>?,
       ),
       title: Text(receiver.userName),
       subtitle: Text(receiver.email),

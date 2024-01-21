@@ -181,7 +181,7 @@ packages:
     source: hosted
     version: "3.0.3"
   data:
-    dependency: transitive
+    dependency: "direct main"
     description:
       path: "../../data"
       relative: true

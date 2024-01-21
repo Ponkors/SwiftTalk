@@ -10,6 +10,7 @@ import 'package:conversation/conversation.dart';
 
 class ContactScreen extends StatelessWidget {
   final UserEntity authenticatedUser;
+
   const ContactScreen({
     required this.authenticatedUser,
     Key? key,
@@ -21,9 +22,7 @@ class ContactScreen extends StatelessWidget {
       create: (context) => ContactsBloc(
         contactsRepository: getIt.get<ContactsRepository>(),
       )..add(ContactsListRequested(loginUID: authenticatedUser.identifierId)),
-      child: ContactView(
-        loginUser: authenticatedUser,
-      ),
+      child: ContactView(loginUser: authenticatedUser),
     );
   }
 }

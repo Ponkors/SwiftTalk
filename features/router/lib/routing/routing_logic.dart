@@ -47,35 +47,28 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('AppBar'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              BlocProvider.of<AuthenticationBloc>(context)
-                  .add(AuthenticationRemoved());
-            },
-            icon: const Icon(Icons.exit_to_app),
-          )
-        ],
+      appBar: CustomAppBar(
+        currentIndex: selectedItem,
+        onIconPressed: () {
+          BlocProvider.of<AuthenticationBloc>(context)
+              .add(AuthenticationRemoved());
+        },
       ),
-      bottomNavigationBar: BottomNavigationBar(
+      // appBar: AppBar(
+      //   title: Text('AppBar'),
+      //   actions: [
+      //     IconButton(
+      //       onPressed: () {
+      //         BlocProvider.of<AuthenticationBloc>(context)
+      //             .add(AuthenticationRemoved());
+      //       },
+      //       icon: const Icon(Icons.exit_to_app),
+      //     )
+      //   ],
+      // ),
+      bottomNavigationBar: CustomBottomNavigationBar(
         currentIndex: selectedItem,
         onTap: _onBottomNavigationBarTapped,
-        items: const [
-          BottomNavigationBarItem(
-            label: 'Contacts',
-            icon: Icon(Icons.contacts_rounded),
-          ),
-          BottomNavigationBarItem(
-            label: 'Chat',
-            icon: Icon(Icons.chat_bubble_outline_rounded),
-          ),
-          BottomNavigationBarItem(
-            label: 'More',
-            icon: Icon(Icons.more_horiz),
-          ),
-        ],
       ),
       body: _homeBodyBuilder(context),
     );

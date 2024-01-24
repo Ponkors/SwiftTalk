@@ -1,19 +1,20 @@
 import 'package:data/data.dart';
 import 'package:core/core.dart';
 
-class FirebaseFirestoreDataProviderImpl implements FirebaseFirestoreDataProvider {
+class FirebaseFirestoreDataProviderImpl
+    implements FirebaseFirestoreDataProvider {
   final FirebaseFirestore _firebaseFirestore;
 
   const FirebaseFirestoreDataProviderImpl({
     required FirebaseFirestore firebaseFirestore,
   }) : _firebaseFirestore = firebaseFirestore;
 
-
   @override
   Future<List<Map<String, dynamic>>> getContacts({
     required String loginUID,
   }) async {
-    final userQuerySnap = await _firebaseFirestore.collection('users')
+    final userQuerySnap = await _firebaseFirestore
+        .collection('users')
         .where('identifierId', isNotEqualTo: loginUID)
         .get();
     return userQuerySnap.docs
@@ -21,14 +22,12 @@ class FirebaseFirestoreDataProviderImpl implements FirebaseFirestoreDataProvider
         .toList();
   }
 
-
-
   @override
   Future<UserEntity> getUser({
     required String uid,
   }) async {
     final DocumentSnapshot<Map<String, dynamic>> userDoc =
-    await _firebaseFirestore.collection('users').doc(uid).get();
+        await _firebaseFirestore.collection('users').doc(uid).get();
     final Map<String, dynamic>? userData = userDoc.data();
     final UserEntity userEntity = UserEntity(
       identifierId: uid,
@@ -39,7 +38,6 @@ class FirebaseFirestoreDataProviderImpl implements FirebaseFirestoreDataProvider
     return userEntity;
   }
 
-
   @override
   Future<void> saveUser({
     required String uid,
@@ -47,14 +45,14 @@ class FirebaseFirestoreDataProviderImpl implements FirebaseFirestoreDataProvider
     required String? email,
   }) async {
     final DocumentReference<Map<String, dynamic>> userDataFirebase =
-    _firebaseFirestore.collection('users').doc(uid);
+        _firebaseFirestore.collection('users').doc(uid);
     final Map<String, String?> userData = {
       'identifierId': uid,
       'name': userName,
       'email': email,
     };
     final DocumentSnapshot<Map<String, dynamic>> user =
-    await userDataFirebase.get();
+        await userDataFirebase.get();
     if (!user.exists) {
       userDataFirebase.set(userData);
     }
@@ -86,7 +84,7 @@ class FirebaseFirestoreDataProviderImpl implements FirebaseFirestoreDataProvider
     required String role,
   }) async {
     final CollectionReference<Map<String, dynamic>> usersDataFirebase =
-    _firebaseFirestore.collection('users');
+        _firebaseFirestore.collection('users');
 
     await usersDataFirebase.doc(uid).update({
       "role": role,

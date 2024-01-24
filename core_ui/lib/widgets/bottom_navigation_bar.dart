@@ -34,7 +34,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
       );
     }).toList();
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: AppDimens.padding5),
+      padding: EdgeInsets.symmetric(horizontal: AppDimens.size5),
       child: ClipRRect(
         borderRadius: BorderRadius.all(Radius.circular(AppDimens.radius16)),
         child: BottomNavigationBar(

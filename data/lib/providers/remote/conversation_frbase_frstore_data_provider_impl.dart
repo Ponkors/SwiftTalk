@@ -10,7 +10,6 @@ class ConversationFirebaseFirestoreDataProviderImpl
     required FirebaseFirestore firebaseFirestore,
   }) : _firebaseFirestore = firebaseFirestore;
 
-
   @override
   Future<Map<String, dynamic>?> getConversationId({
     required senderUID,
@@ -19,11 +18,12 @@ class ConversationFirebaseFirestoreDataProviderImpl
     final members = [senderUID, receiverUID];
     final conversationQuerySnap = await _firebaseFirestore
         .collection(ConversationKey.collectionName)
-        .where(ConversationKey.members,
-          whereIn: [
-            members,
-            members.reversed.toList(),
-          ],
+        .where(
+      ConversationKey.members,
+      whereIn: [
+        members,
+        members.reversed.toList(),
+      ],
     ).get();
     log(conversationQuerySnap.docs.length.toString());
     if (conversationQuerySnap.docs.isNotEmpty) {
@@ -31,7 +31,7 @@ class ConversationFirebaseFirestoreDataProviderImpl
     }
     return null;
   }
-  
+
   @override
   Future<String> createConversation({
     required Map<String, dynamic> conversation,

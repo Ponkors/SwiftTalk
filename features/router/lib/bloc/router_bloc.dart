@@ -14,21 +14,21 @@ class RouterBloc extends Bloc<RouterEvent, RouterState> {
   FutureOr<void> _onContactTapped(
     RouterContactTapped event,
     Emitter<RouterState> emit,
-      ) {
+  ) {
     emit(RouterContact());
   }
 
   FutureOr<void> _onChatTapped(
     RouterChatTapped event,
     Emitter<RouterState> state,
-      ) {
+  ) {
     emit(RouterChat());
   }
 
   FutureOr<void> _onMoreTapped(
-      RouterMoreTapped event,
-      Emitter<RouterState> state,
-      ) {
+    RouterMoreTapped event,
+    Emitter<RouterState> state,
+  ) {
     emit(RouterMore());
   }
 }

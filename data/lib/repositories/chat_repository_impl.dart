@@ -8,18 +8,18 @@ class ChatRepositoryImpl implements ChatRepository {
 
   const ChatRepositoryImpl({
     required FirebaseFirestore firebaseFirestore,
-    required ChatFirebaseFirestoreDataProvider chatFirebaseFirestoreDataProvider,
-  }) : _firebaseFirestore = firebaseFirestore,
-       _chatFirebaseFirestoreDataProvider = chatFirebaseFirestoreDataProvider;
+    required ChatFirebaseFirestoreDataProvider
+        chatFirebaseFirestoreDataProvider,
+  })  : _firebaseFirestore = firebaseFirestore,
+        _chatFirebaseFirestoreDataProvider = chatFirebaseFirestoreDataProvider;
 
   @override
-  Future<List<ConversationModel>> getChats({
-    required String loginUID
-  }) async {
-    final chatMaps = await _chatFirebaseFirestoreDataProvider.getChats(
-      loginUID: loginUID
-    );
-    return chatMaps.map((chatMap) => ConversationModel.fromMap(chatMap)).toList();
+  Future<List<ConversationModel>> getChats({required String loginUID}) async {
+    final chatMaps =
+        await _chatFirebaseFirestoreDataProvider.getChats(loginUID: loginUID);
+    return chatMaps
+        .map((chatMap) => ConversationModel.fromMap(chatMap))
+        .toList();
   }
 }
 

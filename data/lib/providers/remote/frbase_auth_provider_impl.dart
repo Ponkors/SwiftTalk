@@ -4,12 +4,7 @@ import 'package:data/data.dart';
 class FirebaseAuthProviderImpl implements FirebaseAuthProvider {
   final FirebaseAuth firebaseAuth;
 
-
-  const FirebaseAuthProviderImpl({
-    required this.firebaseAuth,
-  });
-
-
+  const FirebaseAuthProviderImpl({required this.firebaseAuth});
 
   Future<User?> loginWithGoogle() async {
     final googleSignInAccount = await GoogleSignIn().signIn();

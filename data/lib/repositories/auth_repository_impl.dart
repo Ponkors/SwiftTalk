@@ -1,3 +1,4 @@
+import 'package:core/core.dart';
 import 'package:data/data.dart';
 import 'package:domain/domain.dart';
 
@@ -10,14 +11,34 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
 
   Future<UserEntity?> loginWithGoogle() async {
     final firebaseUser = await firebaseAuthProviderImpl.loginWithGoogle();
-    return firebaseUser == null
-        ? null
-        : UserEntity(
-            identifierId: firebaseUser.uid,
-            userName: firebaseUser.displayName ?? '',
-            email: firebaseUser.email ?? '',
-            photoURL: firebaseUser.photoURL ?? '',
-          );
+    if (firebaseUser == null) {
+      return null;
+    } else {
+      await saveUserInFirestoreDataBase(firebaseUser);
+    }
+    return UserEntity(
+      identifierId: firebaseUser.uid,
+      userName: firebaseUser.displayName ?? '',
+      email: firebaseUser.email ?? '',
+      photoURL: firebaseUser.photoURL ?? '',
+    );
+  }
+
+  Future<void> saveUserInFirestoreDataBase(User? firebaseUser) async {
+    if (firebaseUser != null) {
+      CollectionReference usersCollection =
+          FirebaseFirestore.instance.collection('users');
+      var userSnapshot =
+          await usersCollection.doc(firebaseUser.displayName).get();
+      if (!userSnapshot.exists) {
+        await usersCollection.doc(firebaseUser.uid).set({
+          'userName': firebaseUser.displayName ?? '',
+          'email': firebaseUser.email ?? '',
+          'photoURL': firebaseUser.photoURL ?? '',
+          'identifierId': firebaseUser.uid ?? '',
+        });
+      }
+    }
   }
 
   Stream<bool> isLoggedIn() {

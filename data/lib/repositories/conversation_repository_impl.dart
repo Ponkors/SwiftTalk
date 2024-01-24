@@ -5,25 +5,25 @@ import 'package:domain/domain.dart';
 class ConversationRepositoryImpl implements ConversationRepository {
   final FirebaseFirestore _firebaseFirestore;
   final ConversationFirebaseFirestoreDataProvider
-          _conversationFirebaseFirestoreDataProvider;
+      _conversationFirebaseFirestoreDataProvider;
 
   const ConversationRepositoryImpl({
     required FirebaseFirestore firebaseFirestore,
     required ConversationFirebaseFirestoreDataProvider
-                conversationFirebaseFirestoreDataProvider,
-  }) : _firebaseFirestore = firebaseFirestore,
+        conversationFirebaseFirestoreDataProvider,
+  })  : _firebaseFirestore = firebaseFirestore,
         _conversationFirebaseFirestoreDataProvider =
-          conversationFirebaseFirestoreDataProvider;
+            conversationFirebaseFirestoreDataProvider;
 
   @override
   Future<ConversationModel?> getConversation({
     required String senderUID,
     required String receiverUID,
   }) async {
-    final conversationMap = await _conversationFirebaseFirestoreDataProvider
-        .getConversationId(
-          senderUID: senderUID,
-          receiverUID: receiverUID,
+    final conversationMap =
+        await _conversationFirebaseFirestoreDataProvider.getConversationId(
+      senderUID: senderUID,
+      receiverUID: receiverUID,
     );
     if (conversationMap == null) {
       return null;
@@ -36,11 +36,10 @@ class ConversationRepositoryImpl implements ConversationRepository {
   Future<String> createConversation({
     required ConversationModel conversation,
   }) async {
-    final conversationId = await _conversationFirebaseFirestoreDataProvider
-        .createConversation(
-          conversation: conversation.toMap(),
+    final conversationId =
+        await _conversationFirebaseFirestoreDataProvider.createConversation(
+      conversation: conversation.toMap(),
     );
     return conversationId;
   }
-
 }

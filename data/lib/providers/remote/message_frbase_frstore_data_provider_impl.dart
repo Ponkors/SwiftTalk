@@ -2,7 +2,7 @@ import 'package:core/core.dart';
 import 'package:data/data.dart';
 
 class MessageFirebaseFirestoreDataProviderImpl
-    implements MessageFirebaseFirestoreDataProvider{
+    implements MessageFirebaseFirestoreDataProvider {
   final FirebaseFirestore _firebaseFirestore;
 
   MessageFirebaseFirestoreDataProviderImpl({
@@ -12,7 +12,6 @@ class MessageFirebaseFirestoreDataProviderImpl
   Future<void> addMessage({required Map<String, dynamic> messageMap}) async {
     await _firebaseFirestore.collection(MessageKeys.collection).add(messageMap);
   }
-
 
   Stream<List<Map<String, dynamic>>> getMessages({
     required String conversationId,
@@ -24,7 +23,7 @@ class MessageFirebaseFirestoreDataProviderImpl
         .snapshots();
 
     return querySnapShotStream.map(
-          (event) => event.docs.map((e) => e.data()).toList(),
+      (event) => event.docs.map((e) => e.data()).toList(),
     );
   }
 }
